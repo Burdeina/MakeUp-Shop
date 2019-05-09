@@ -1,6 +1,7 @@
 var http = require('http');
+var fs = require('fs');
 
-var html =`
+var html = `
 <!DOCTYPE html>
 <html>
 <body>
@@ -8,23 +9,26 @@ var html =`
 <p>Тобі відповів САМ сервер...</p>
 </body>
 </html>`
-
 http.createServer( function(req, res){
     console.log(req.url);
     console.log(req.method);
-    switch(req.url){
-        case '/':
-        res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
-        res.end(html);
 
-        default:
-        res.writeHead(404, {'Content-Type': 'text/plain; charset=utf-8'});
-        res.end('Error 404');
-    }
     //console.log(req.headers);
-    res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
-    res.end(html);
-}).listen(3000, '127.0.0.1');
+
+    if(req.url == '/'){
+        res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
+        fs.createReadStream("../static/index.html", "utf8").pipe(res);
+    }else if(req.url == '/style.css'){
+        res.writeHead(200, {'Content-Type': 'text/css; charset=utf-8'});
+        fs.createReadStream("../static/style.css", "utf8").pipe(res);
+    }else if(req.url == '/script.js'){
+        res.writeHead(200, {'Content-Type': 'text/javascript; charset=utf-8'});
+        fs.createReadStream("../static/script.js", "utf8").pipe(res);
+    }else{
+        res.writeHead(404, {'Content-Type': 'text/html; charset=utf-8'});
+        fs.createReadStream("../static/error404.html", "utf8").pipe(res);
+    }
+    }).listen(3000, '127.0.0.1');
 
 
 
