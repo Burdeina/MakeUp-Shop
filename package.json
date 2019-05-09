@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/Burdeina/MakeUp-Shop.git"
   },
-  "keywords":  [
+  "keywords": [
     "web",
     "store",
     "shop",
@@ -24,7 +24,9 @@
   },
   "homepage": "https://github.com/Burdeina/MakeUp-Shop#readme",
   "dependencies": {
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "mongoose": "^5.5.7",
     "pug": "^2.0.3"
   }
 }
