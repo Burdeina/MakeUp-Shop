@@ -25,9 +25,17 @@
   "homepage": "https://github.com/Burdeina/MakeUp-Shop#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "bson": "^4.0.2",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "memory-pager": "^1.5.0",
+    "mongodb": "^3.2.4",
+    "mongodb-core": "^3.2.4",
     "mongoose": "^5.5.7",
-    "pug": "^2.0.3"
+    "pug": "^2.0.3",
+    "require_optional": "^1.0.1",
+    "resolve-from": "^5.0.0",
+    "saslprep": "^1.0.3",
+    "semver": "^6.0.0"
   }
 }
