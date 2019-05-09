@@ -1,33 +1,25 @@
-`var http = require('http');
+var http = require('http');
 var fs = require('fs');
+var express = require('express');
 
-var html =
-<!DOCTYPE html>
-<html>
-<body>
-<h1>Привіт</h1>
-<p>Тобі відповів САМ сервер...</p>
-</body>
-</html>
-http.createServer( function(req, res){
-    console.log(req.url);
-    console.log(req.method);
-    if(req.url == '/' || req.url == '/index.html'){
-        res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
-        fs.createReadStream("../static/index.html", "utf8").pipe(res);
-    }else if(req.url == '/style.css'){
-        res.writeHead(200, {'Content-Type': 'text/css; charset=utf-8'});
-        fs.createReadStream("../static/style.css", "utf8").pipe(res);
-    }else if(req.url == '/script.js'){
-        res.writeHead(200, {'Content-Type': 'text/javascript; charset=utf-8'});
-        fs.createReadStream("../static/script.js", "utf8").pipe(res);
-    }else{
-        res.writeHead(404, {'Content-Type': 'text/html; charset=utf-8'});
-        fs.createReadStream("../static/error404.html", "utf8").pipe(res);
-    }
-    }).listen(3000, '127.0.0.1');
+var app=express();
 
+app.set('view engine', 'ejs');
 
+app.get('/', function(req, res) {
+    res.sendFile(__dirname + "/index.html");
+});
+app.get('/static/css/style.css', function(req, res) {
+    res.sendFile(__dirname + "/style.css");
+});
+
+app.get('/static/scripts/script.js', function(req, res) {
+    res.sendFile(__dirname + "/script.js");
+});
+app.get('/:id', function(req, res) {
+    res.send("id: " + req.params.id);
+});
+app.listen(3000); 
 
 `
 
@@ -73,4 +65,4 @@ app.get('/articles/add',function(req,res){
 });
 app.listen(3000,function(){
   console.log('Server started^^');
-})
+})`
