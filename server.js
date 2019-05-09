@@ -1,6 +1,6 @@
 var http = require('http');
 
-var html = `
+var html =`
 <!DOCTYPE html>
 <html>
 <body>
@@ -25,3 +25,29 @@ http.createServer( function(req, res){
     res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
     res.end(html);
 }).listen(3000, '127.0.0.1');
+
+
+
+`
+
+const express=require('express');
+const path=require('path');
+const app=express();
+
+
+app.set('views',path.join(__dirname,'views'));
+app.set('view engine','pug');
+app.get('/',function(req,res){
+  res.render("index",{
+    title:'Hello'
+  });
+});
+app.get('/articles/add',function(req,res){
+  res.render('add_article',{
+    title:'Add article'
+  });
+});
+app.listen(3000,function(){
+  console.log('Server started^^');
+})
+`
