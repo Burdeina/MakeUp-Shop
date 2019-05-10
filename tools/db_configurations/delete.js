@@ -10,7 +10,7 @@ MongoClient.connect(url, function(err, db) {
 
 
 /*Delete the first customers with the name "Mount":*/
-  var myquery = { name: 'Mount' };
+  var myquery = { name: 'Powder' };
   dbo.collection("products").deleteOne(myquery, function(err, obj) {
     if (err) throw err;
     console.log(obj.result.n + " document(s) deleted");

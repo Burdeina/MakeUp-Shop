@@ -5,8 +5,10 @@ var bodyParser = require('body-parser');
 var mongo = require('mongodb');
 
 var app = express();
+var mc = mongo.MongoClient;
+var mongourl = "mongodb://localhost:27017/";
 
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 app.set('view engine', 'ejs');
 app.use(express.static('static'));
@@ -53,8 +55,22 @@ app.get('/css/style.css', function(req, res) {
 });
 
 app.get('/product/:id', function(req, res) {
-    var obj = {name: "lipstick", count: "7", params: ["color:pink", "price 89$","producer:doir"]};
-    res.render('product', {productId: req.params.id, obj: obj});
+  var obj;
+var id = req.params.id;
+mc.connect(mongourl, { useNewUrlParser: true }, function(err, db) {
+   if (err) throw err;
+   var dbo = db.db("webstore");
+   var query = { _id: id };
+   dbo.collection("products").findOne({}, function(err, result) {
+       if (err) throw err;
+       console.log(result);
+       obj = {name: result.name, producer: result.producer};
+       console.log(obj);
+       res.render('product', {productId: id, obj: obj});
+       db.close();
+   });
+});
+console.log(id);
 });
 app.get('/scripts/errorMenuScript.js', function(req, res) {
     // if (1) then...
