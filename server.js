@@ -7,12 +7,19 @@ var path = require('path');
 var mongoose = require('mongoose');
 
 //init mongoose
-mongoose.connect('mongodb://localhost:webstore');
+mongoose.connect('mongodb://localhost:27017/webstore');
 var db = mongoose.connection;
 
+//check for db connection and errors
+db.once('open', function(){
+    console.log("DB connected");
+});
+db.on('error', function(err){
+    console.log(err);
+});
+
 var app = express();
-var mc = mongo.MongoClient;
-var mongourl = "mongodb://localhost:27017/";
+var Product = require('./models/product');
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
@@ -28,7 +35,7 @@ app.use(express.static('static'));
 
 
 app.get('/', function(req, res) {
-  var products = [
+`  var products = [
         {
           id: 1,
           name: 'Lipstick',
@@ -61,13 +68,13 @@ app.get('/', function(req, res) {
           classification: 'Middle Market',
           made_in: 'USA',
       }
-    ];
+    ];`
     res.render("index", {
         products: products
     });
 });
 app.get('/index', function(req, res) {
-  var products = [
+`  var products = [
       {
           id: 1,
           name: 'Lipstick',
@@ -100,7 +107,7 @@ app.get('/index', function(req, res) {
           classification: 'Middle Market',
           made_in: 'USA',
       }
-  ];
+  ];`
   res.render("index", {
       products: products
   });
