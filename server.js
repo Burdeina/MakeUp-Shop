@@ -4,6 +4,11 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongo = require('mongodb');
 var path = require('path');
+var mongoose = require('mongoose');
+
+//init mongoose
+mongoose.connect('mongodb://localhost:webstore');
+var db = mongoose.connection;
 
 var app = express();
 var mc = mongo.MongoClient;
@@ -23,10 +28,82 @@ app.use(express.static('static'));
 
 
 app.get('/', function(req, res) {
-  res.render("index");
+  var products = [
+        {
+          id: 1,
+          name: 'Lipstick',
+          producer: 'Dior',
+          volume: '12 ml',
+          classification: 'Elite',
+          made_in: 'France',
+      },
+      {
+          id: 2,
+          name: 'Lipstick',
+          producer: 'Chanell',
+          volume: '12 ml',
+          classification: 'Elite',
+          made_in: 'France',
+      },
+      {
+          id: 3,
+          name: 'Powder',
+          producer: 'Loreal',
+          volume: '50 gr',
+          classification: 'Mass Market',
+          made_in: 'France',
+      },
+      {
+          id: 4,
+          name: 'Lipstick',
+          producer: 'NYX',
+          volume: '18 ml',
+          classification: 'Middle Market',
+          made_in: 'USA',
+      }
+    ];
+    res.render("index", {
+        products: products
+    });
 });
 app.get('/index', function(req, res) {
-    res.render("index");
+  var products = [
+      {
+          id: 1,
+          name: 'Lipstick',
+          producer: 'Dior',
+          volume: '12 ml',
+          classification: 'Elite',
+          made_in: 'France',
+      },
+      {
+          id: 2,
+          name: 'Lipstick',
+          producer: 'Chanell',
+          volume: '12 ml',
+          classification: 'Elite',
+          made_in: 'France',
+      },
+      {
+          id: 3,
+          name: 'Powder',
+          producer: 'Loreal',
+          volume: '50 gr',
+          classification: 'Mass Market',
+          made_in: 'France',
+      },
+      {
+          id: 4,
+          name: 'Lipstick',
+          producer: 'NYX',
+          volume: '18 ml',
+          classification: 'Middle Market',
+          made_in: 'USA',
+      }
+  ];
+  res.render("index", {
+      products: products
+  });
 });
 
 app.get('/error404', function(req, res) {
