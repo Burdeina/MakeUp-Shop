@@ -35,6 +35,17 @@ app.use(express.static('static'));
 
 
 app.get('/', function(req, res) {
+  Product.find({}, function(err, products){
+        if(err){
+            console.log(err);
+        } else {
+            res.render("index", {
+                title: "Home",
+                products: products
+            });
+        }
+    });
+});
 `  var products = [
         {
           id: 1,
@@ -69,10 +80,7 @@ app.get('/', function(req, res) {
           made_in: 'USA',
       }
     ];`
-    res.render("index", {
-        products: products
-    });
-});
+
 app.get('/index', function(req, res) {
 `  var products = [
       {
@@ -108,13 +116,22 @@ app.get('/index', function(req, res) {
           made_in: 'USA',
       }
   ];`
-  res.render("index", {
-      products: products
-  });
+  Product.find({}, function(err, products){
+       if(err){
+           console.log(err);
+       } else {
+           res.render("index", {
+               title: "Home",
+               products: products
+           });
+       }
+   });
 });
 
 app.get('/error404', function(req, res) {
-    res.render("error404");
+  res.render("error404", {
+     title: "Error 404"
+ });
 });
 
 app.get('/login', function(req, res) {
