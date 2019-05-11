@@ -2,10 +2,10 @@ var mongoose = require('mongoose');
 
 //Product Shema
 var productShema = mongoose.Schema({
-  _id:{
-       type: Number,
-       required: true
-   },
+//  _id:{
+//       type: Number,
+  //     required: false
+   //},
     name:{
         type: String,
         required: true

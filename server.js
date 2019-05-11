@@ -21,7 +21,11 @@ db.on('error', function(err){
 var app = express();
 var Product = require('./models/product');
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
+// parse application/json
+app.use(bodyParser.json())
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -82,40 +86,7 @@ app.get('/', function(req, res) {
     ];`
 
 app.get('/index', function(req, res) {
-`  var products = [
-      {
-          id: 1,
-          name: 'Lipstick',
-          producer: 'Dior',
-          volume: '12 ml',
-          classification: 'Elite',
-          made_in: 'France',
-      },
-      {
-          id: 2,
-          name: 'Lipstick',
-          producer: 'Chanell',
-          volume: '12 ml',
-          classification: 'Elite',
-          made_in: 'France',
-      },
-      {
-          id: 3,
-          name: 'Powder',
-          producer: 'Loreal',
-          volume: '50 gr',
-          classification: 'Mass Market',
-          made_in: 'France',
-      },
-      {
-          id: 4,
-          name: 'Lipstick',
-          producer: 'NYX',
-          volume: '18 ml',
-          classification: 'Middle Market',
-          made_in: 'USA',
-      }
-  ];`
+
   Product.find({}, function(err, products){
        if(err){
            console.log(err);
@@ -156,6 +127,30 @@ app.get('/images/dior_lip_maximazer.jpg', function(req, res) {
 app.get('/css/style.css', function(req, res) {
     //if (1) then use /static/css/style.css
 });
+app.get('/product/add', function(req, res) {
+    res.render("add_product", {
+        title: "Add product"
+    });
+});
+
+app.post('/product/add', function(req, res) {
+    let product = new Product();
+    product.name = req.body.name;
+    product.producer = req.body.producer;
+    product.volume = req.body.volume;
+    product.classification = req.body.classification;
+    product.made_in = req.body.made_in;
+
+
+    product.save(function(err){
+        if(err){
+            console.log(err);
+            return;
+        } else {
+            res.redirect('/')
+        }
+    });
+});
 
 app.get('/product/:id', function(req, res) {
   var obj;
@@ -184,49 +179,3 @@ app.get('/scripts/menuScript.js', function(req, res) {
     //res.sendFile(__dirname + "/menuScript.js");
 });
 app.listen(3000);
-
-`
-
-const express=require('express');
-const path=require('path');
-const mongoose=require('mongoose');
-
-mongoose.connect('mongodb://localhost/nodekb');
-let db = mongoose.connection;
-//Check connection
-db.once('open',function(){
-  console.log('Connected to MongoDB');
-})
-
-//Check for DB errors
-db.on('error',function(err){
-  console.log(err);
-});
-const app=express();
-
-let Article=require('./models/article');
-
-app.set('views',path.join(__dirname,'views'));
-app.set('view engine','pug');
-app.get('/',function(req,res){
-  Article.find({},function(err,articles){
-    if(err){
-      console.log(err);
-    }else{
-      res.render("index",{
-        title:'Articles'
-        articles:articles
-      });
-    }
-
-
-  });
-});
-app.get('/articles/add',function(req,res){
-  res.render('add_article',{
-    title:'Add article'
-  });
-});
-app.listen(3000,function(){
-  console.log('Server started^^');
-})`

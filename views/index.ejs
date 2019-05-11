@@ -2,6 +2,7 @@
 <html>
 <head>
     <% include blocks/links.ejs %>
+        <title> <%= title %> </title>
 </head>
 <body>
 
@@ -10,17 +11,12 @@
 <div id="main">
   <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
   <i class="fas fa-dragon" style="font-size:35px;color:slategray;text-shadow:2px 2px 4px #000000;"></i>
-    <h1>&copy; Burdeina Ira 2019</h1>
-    <h3>LNU AMI-34</h3>
-    <h3>Address. 1, Universytetska str., Lviv, 79000</h3>
-    <h3>Tel. 0123456789</h3>
-    <h3>E-mail: iruna.burdeina@gmail.com</h3>
-    <ul>
+   <h1>Webstore</h1>
    <% products.forEach(function(product) { %>
        <li><%= product.name %> - <%= product.producer %></li>
    <% }); %>
    </ul>
-
+    <% include blocks/footer.ejs %>
 
 
 </div>
