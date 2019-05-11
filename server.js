@@ -142,6 +142,17 @@ app.get('/product/edit/:id', function(req, res){
         }
     });
 });
+app.delete('/product/:id', function(req, res){
+    var query = { _id: req.params.id};
+
+    console.log(req.params.id);
+    Product.remove(query, function(err){
+        if(err){
+            console.log(err);
+        }
+        res.send('Success');
+    });
+});
 
 app.post('/product/edit/:id', function(req, res) {
     let product = {};
@@ -150,7 +161,7 @@ app.post('/product/edit/:id', function(req, res) {
     product.volume = req.body.volume;
     product.classification = req.body.classification;
     product.made_in = req.body.made_in;
-    
+
 
     var query = { _id: req.params.id};
 
@@ -192,4 +203,10 @@ app.get('/scripts/menuScript.js', function(req, res) {
 app.get('/css/product.css', function(req, res) {
     //if (1) then use /static/css/style.css
 });
+app.get('/scripts/delete.js', function(req, res) {
+
+});
+
+app.get('/bower_components/jquery/dist/jquery.js', function(req, res) { });
+app.get('/bower_components/bootstrap/dist/css/bootstrap.js', function(req, res) { });
 app.listen(3000);
