@@ -22,15 +22,23 @@
       <img src="/images/dior_lip_maximazer.jpg" style="width:100%">
     </div>
     <div class="column">
-
+      <% if(!user); else {%>
+          <% if(user.isAdmin) {%>
+            <h2>ID: <%= product._id %></h2>
+          <%}%>
+      <%}%>
     <h2>Producer: <%= product.producer %></h2>
     <h2>Volume: <%= product.volume %></h2>
     <h2>Classification: <%= product.classification %></h2>
     <h2>Made in: <%= product.made_in %></h2>
-
+    <h2>Price: <%= product.price - (product.discount * product.price/100) %>&#36;</h2>
+    <% if(product.discount != 0) {%>
+      <h2 style="color: red;">Discount: <%= product.discount %>&#37;</h2>
+    <% } %>
     <% if(user) {%>
 <% if(user.isAdmin == true) {%>
 <p><a href="/products/edit/<%= product._id %>" target="_parent"><button>Edit</button></a></p>
+<p><a href="/products/add_discount/<%= product._id %>" target="_parent"><button>Add discount</button></a></p>
 <a class = "delete-product" href="#" id="blabla" data-id=<%= product._id %> teemp="12s4f"><button class="delete">Delete</button></a>
 <%}%>
 <%}%>

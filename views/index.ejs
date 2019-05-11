@@ -3,6 +3,7 @@
 <head>
     <% include blocks/links.ejs %>
         <title> <%= title %> </title>
+            <link rel="stylesheet" href="/css/buttons.css">
 </head>
 <body>
 
@@ -14,7 +15,7 @@
       <h1>All products:</h1>
 
           <label class="ccontainer">List view
-          <i class='fas fa-list-ul' style='font-size:20px'></i>
+        <i class='fas fa-list-ul' style='font-size:20px'></i>
               <input type="checkbox" id="myCheck"  onclick="controll_view()">
               <span class="checkmark"></span>
           </label>
@@ -31,8 +32,15 @@
           <div class="row">
               <% products.forEach(function(product) { %>
                   <div class="card col-sm-6 col-lg-4" style="margin-bottom: 20px">
+                    <% var cc = "black" %>
+                    <% var bc = "white" %>
+                    <% if(product.discount != 0) {%>
+                        <% cc = "red" %>
+                        <% var bc = "powderblue" %>
+                    <% } %>
                       <img src="/images/dior_lip_maximazer.jpg" alt="comp" style="width:100%; height: auto;">
                       <h2><a href="/products/<%= product._id %>"><%= product.name %></a></h2>
+                      <h2 style="color: <%= cc %>; background-color:<%= bc %>;">Price: <%= product.price - (product.discount * product.price/100) %>&#36;</h2>
                       <p></p>
                       <p><a href="/products/<%= product._id %>" target="_parent"><button>Buy</button></a></p>
                   </div>
@@ -41,7 +49,14 @@
            </div>
        </div>
 
-
+       <div align="center" >
+           <br>
+           <a href="/index/<%- pageid - 1 %>" class="previous round">&#8249; Previous</a>
+           ..<%= pageid %>..
+           <a href="/index/<%- pageid - (-1) %>" class="next round">Next &#8250;</a>
+           <br>
+           <br>
+       </div>
     <% include blocks/footer.ejs %>
 
 
