@@ -8,7 +8,10 @@ var mongoose = require('mongoose');
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
 var session = require('express-session');
-mongoose.connect('mongodb://localhost:27017/webstore');
+var passport = require('passport');
+var config = require('./config/database');
+
+mongoose.connect(config.database);
 var db = mongoose.connection;
 db.once('open', function(){
     console.log("DB connected");
@@ -59,11 +62,22 @@ app.use(expressValidator({
       };
     }
   }));
+
+  //passport config and middleware
+require('./config/passport')(passport);
+app.use(passport.initialize());
+app.use(passport.session());
 // (1)
 // !!! app.use('/static', express.static('static'));
 // !!! 1 static url starts with /static
 // !!! 2 static local folder name static/..
-// if more folders us this!!!
+// if more folders use this!!!
+
+app.get('*', function(req, res, next){
+    res.locals.user = req.user || null;
+    next();
+  });
+  
 app.get('/', function(req, res) {
     Product.find({}, function(err, products){
         if(err){
