@@ -25,6 +25,18 @@ var productShema = mongoose.Schema({
     made_in: {
         type: String,
         required: true
+    },
+    pageid: {
+    type: Number,
+    required: true
+    },
+    price: {
+      type: Number,
+      required: true
+    },
+    discount: {
+      type: Number,
+      required: true
     }
 
 });

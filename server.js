@@ -79,26 +79,45 @@ app.get('*', function(req, res, next){
   });
 
 app.get('/', function(req, res) {
-    Product.find({}, function(err, products){
+  var query = { pageid: 1 };
+  Product.find(query, function(err, products){
         if(err){
             console.log(err);
         } else {
             res.render("index", {
                 title: "Home",
-                products: products
+                products: products,
+                pageid: 1
             });
         }
     });
 });
 //Todo: add titles to other pages(prdct, lgn...)
 app.get('/index', function(req, res) {
-    Product.find({}, function(err, products){
+  var query = { pageid: 1 };
+  Product.find(query, function(err, products){
+      if(err){
+          console.log(err);
+      } else {
+          res.render("index", {
+              title: "Home",
+              products: products,
+              pageid: 1
+          });
+      }
+  });
+});
+
+app.get('/index/:pageid', function(req, res) {
+  var query = { pageid: req.params.pageid };
+  Product.find(query, function(err, products){
         if(err){
             console.log(err);
         } else {
             res.render("index", {
                 title: "Home",
-                products: products
+                products: products,
+                pageid: req.params.pageid
             });
         }
     });
@@ -135,6 +154,9 @@ app.get('/css/product.css', function(req, res) {
 });
 app.get('/scripts/errorMenuScript.js', function(req, res) {
     // if (1) then...
+});
+app.get('/css/buttons.css', function(req, res) {
+    //if (1) then use /static/css/style.css
 });
 app.get('/scripts/menuScript.js', function(req, res) {
     // if (1) then...

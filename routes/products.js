@@ -21,6 +21,8 @@ router.post('/add', ensureAuthenticated, function(req, res) {
   req.checkBody('volume', 'volume is required').notEmpty();
   req.checkBody('classification', 'classification is required').notEmpty();
   req.checkBody('made_in', 'made_in is required').notEmpty();
+  req.checkBody('pageid', 'pageid is required').notEmpty();
+  req.checkBody('price', 'price is required').notEmpty();
 
     var errors = req.validationErrors();
 
@@ -36,6 +38,9 @@ router.post('/add', ensureAuthenticated, function(req, res) {
         product.volume = req.body.volume;
         product.classification = req.body.classification;
         product.made_in = req.body.made_in;
+        product.pageid = req.body.pageid;
+        product.price = req.body.price;
+        product.discount = 0;
 
         product.save(function(err){
             if(err){
@@ -51,11 +56,11 @@ router.post('/add', ensureAuthenticated, function(req, res) {
 
 router.get('/edit/:id', ensureAuthenticated, function(req, res){
     Product.findById(req.params.id, function(err, product){
-      User.findById(req.user._id, function(err, user){
-           if(!user.isAdmin){
-               req.flash('danger', 'You do not have access to this page');
-               res.redirect('/');
-           }
+      // User.findById(req.user._id, function(err, user){
+      //     if(!user.isAdmin){
+      //         req.flash('danger', 'You do not have access to this page');
+      //         res.redirect('/');
+      //     }
            if(err){
                console.log(err);
            } else {
@@ -64,7 +69,7 @@ router.get('/edit/:id', ensureAuthenticated, function(req, res){
                    product: product
                });
            }
-       });
+      // });
    });
 });
 
@@ -75,6 +80,9 @@ router.post('/edit/:id', ensureAuthenticated, function(req, res) {
     product.volume = req.body.volume;
     product.classification = req.body.classification;
     product.made_in = req.body.made_in;
+    product.pageid = req.body.pageid;
+    product.price = req.body.price;
+    product.discount = req.body.discount;
 
     var query = { _id: req.params.id};
 
@@ -84,6 +92,35 @@ router.post('/edit/:id', ensureAuthenticated, function(req, res) {
             return;
         } else {
             req.flash('success', 'Product updated');
+            res.redirect('/');
+        }
+    });
+});
+router.get('/add_discount/:id', ensureAuthenticated, function(req, res){
+    Product.findById(req.params.id, function(err, product){
+        if(err){
+            console.log(err);
+        } else {
+            res.render("add_discount", {
+                title: "Add discount",
+                product: product
+            });
+        }
+    });
+});
+
+router.post('/add_discount/:id', ensureAuthenticated, function(req, res) {
+    let product = {};
+    product.discount = req.body.discount;
+
+    var query = { _id: req.params.id};
+
+    Product.updateOne(query, product, function(err){
+        if(err){
+            console.log(err);
+            return;
+        } else {
+            req.flash('success', 'Discount added!');
             res.redirect('/');
         }
     });

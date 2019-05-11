@@ -103,7 +103,7 @@ transition: background-color .5s;
   width: 40%;
   margin-left: 30%;
   margin-top: 100px;
-  height: 620px;
+  height: 800px;
 }
 /* Clear floats after the columns */
 .row:after {
@@ -216,4 +216,4 @@ small{
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
-} 
+}
