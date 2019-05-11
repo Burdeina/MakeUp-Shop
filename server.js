@@ -130,6 +130,40 @@ app.get('/product/:id', function(req, res){
         }
     });
 });
+app.get('/product/edit/:id', function(req, res){
+    Product.findById(req.params.id, function(err, product){
+        if(err){
+            console.log(err);
+        } else {
+            res.render("edit_product", {
+                title: "Edit product",
+                product: product
+            });
+        }
+    });
+});
+
+app.post('/product/edit/:id', function(req, res) {
+    let product = {};
+    product.name = req.body.name;
+    product.producer = req.body.producer;
+    product.volume = req.body.volume;
+    product.classification = req.body.classification;
+    product.made_in = req.body.made_in;
+    
+
+    var query = { _id: req.params.id};
+
+    Product.updateOne(query, product, function(err){
+        if(err){
+            console.log(err);
+            return;
+        } else {
+            res.redirect('/')
+        }
+    });
+});
+
 app.get('/product/:model', function(req, res) {
     // var obj = {name: "dell", count: "7", pars: ["intel core i7", "nvidia geforce 960", "ssd 512Gb", "full hd ips"]};
     // var obj;

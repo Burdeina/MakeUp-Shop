@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include blocks/links.ejs %>
+    <title> <%= title %> </title>
+</head>
+<body>
+
+<% include blocks/menu.ejs %>
+
+<div id="main">
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+    <i class="fas fa-dragon" style="font-size:35px;color:slategray;text-shadow:2px 2px 4px #000000;"></i>
+
+    <div class="form-add">
+        <h2><%= title %></h2>
+
+        <form method="POST" action="/product/edit/<%= product._id %>">
+            <div class="row">
+                <div class="col">
+                        <div class="form-group">
+                            <label for="Name">Name:</label>
+                            <input type="name" name="name" class="form-control" id="name" placeholder="name" value=<%= product.name %>>
+                        </div>
+                            <div class="form-group">
+                              <label for="Producer">Producer:</label>
+                              <input type="producer" name="producer" class="form-control" id="producer" placeholder="producer" value=<%= product.producer %>>
+                        </div>
+                        <div class="form-group">
+                          <label for="Volume">Volume:</label>
+                          <input type="volume" name="volume" class="form-control" id="volume" placeholder="volume" value=<%= product.volume %>>
+                        </div>
+                            <div class="form-group">
+                              <label for="Classification">Classification:</label>
+                              <input type="classification" name="classification" class="form-control" id="classification" placeholder="classification" value=<%= product.classification %>>
+                        </div>
+                        <div class="form-group">
+                          <label for="Made_in">Made_in:</label>
+                          <input type="made_in" name="made_in" class="form-control" id="made_in" placeholder="made_in" value=<%= product.made_in %>>
+                        </div>
+
+                        <button>Confirm</button>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+
+
+</div>
+
+<% include blocks/footer.ejs %>
+
+  <script src="/scripts/menuScript.js"></script>
+  <script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="/bower_components/bootstrap/dist/css/bootstrap.js"></script>
+  </body>
+  </html>
