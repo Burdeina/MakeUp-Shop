@@ -50,40 +50,7 @@ app.get('/', function(req, res) {
         }
     });
 });
-`  var products = [
-        {
-          id: 1,
-          name: 'Lipstick',
-          producer: 'Dior',
-          volume: '12 ml',
-          classification: 'Elite',
-          made_in: 'France',
-      },
-      {
-          id: 2,
-          name: 'Lipstick',
-          producer: 'Chanell',
-          volume: '12 ml',
-          classification: 'Elite',
-          made_in: 'France',
-      },
-      {
-          id: 3,
-          name: 'Powder',
-          producer: 'Loreal',
-          volume: '50 gr',
-          classification: 'Mass Market',
-          made_in: 'France',
-      },
-      {
-          id: 4,
-          name: 'Lipstick',
-          producer: 'NYX',
-          volume: '18 ml',
-          classification: 'Middle Market',
-          made_in: 'USA',
-      }
-    ];`
+
 
 app.get('/index', function(req, res) {
 
@@ -151,23 +118,33 @@ app.post('/product/add', function(req, res) {
         }
     });
 });
-
-app.get('/product/:id', function(req, res) {
-  var obj;
-var id = req.params.id;
-mc.connect(mongourl, { useNewUrlParser: true }, function(err, db) {
-   if (err) throw err;
-   var dbo = db.db("webstore");
-   var query = { _id: id };
-   dbo.collection("products").findOne({}, function(err, result) {
-       if (err) throw err;
-       console.log(result);
-       obj = {name: result.name, producer: result.producer};
-       console.log(obj);
-       res.render('product', {productId: id, obj: obj});
-       db.close();
-   });
+app.get('/product/:id', function(req, res){
+    Product.findById(req.params.id, function(err, product){
+        if(err){
+            console.log(err);
+        } else {
+            res.render("product", {
+                title: "Product card",
+                product: product
+            });
+        }
+    });
 });
+app.get('/product/:model', function(req, res) {
+    // var obj = {name: "dell", count: "7", pars: ["intel core i7", "nvidia geforce 960", "ssd 512Gb", "full hd ips"]};
+    // var obj;
+    // var id = req.params.id;
+    var query = { model: req.params.model };
+    Product.find(query, function(err, products){
+        if(err){
+            console.log(err);
+        } else {
+            res.render("product", {
+                title: "Product card",
+                products: products
+            });
+        }
+    });
 console.log(id);
 });
 app.get('/scripts/errorMenuScript.js', function(req, res) {
@@ -177,5 +154,8 @@ app.get('/scripts/errorMenuScript.js', function(req, res) {
 app.get('/scripts/menuScript.js', function(req, res) {
     // if (1) then...
     //res.sendFile(__dirname + "/menuScript.js");
+});
+app.get('/css/product.css', function(req, res) {
+    //if (1) then use /static/css/style.css
 });
 app.listen(3000);

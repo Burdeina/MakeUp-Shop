@@ -12,16 +12,33 @@
   <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
   <i class="fas fa-dragon" style="font-size:35px;color:slategray;text-shadow:2px 2px 4px #000000;"></i>
    <h1>Webstore</h1>
+       <ul class="list-group">
    <% products.forEach(function(product) { %>
-       <li><%= product.name %> - <%= product.producer %></li>
+       <li class = "list-group-item"><a href="/product/<%= product._id %>"><%= product.name %></a> - <%= product.producer %></li>
    <% }); %>
    </ul>
+   <p></p>
+       <div class="container">
+           <div class="row">
+               <% products.forEach(function(product) { %>
+                   <div class="card col-sm-6 col-lg-4" style="margin-bottom: 20px">
+                       <img src="/images/dior_lip_maximazer.jpg" alt="comp" style="width:100%; height: auto;">
+                       <h2><a href="/product/<%= product._id %>"><%= product.name %></a></h2>
+                       <p></p>
+                       <p><button>Buy</button></p>
+                   </div>
+               <% }); %>
+           </div>
+       </div>
+
+
     <% include blocks/footer.ejs %>
 
 
 </div>
 <% include blocks/footer.ejs %>
 <script src="/scripts/menuScript.js"></script>
-
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="/bower_components/bootstrap/dist/css/bootstrap.js"></script>
 </body>
 </html>
