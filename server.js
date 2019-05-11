@@ -77,7 +77,7 @@ app.get('*', function(req, res, next){
     res.locals.user = req.user || null;
     next();
   });
-  
+
 app.get('/', function(req, res) {
     Product.find({}, function(err, products){
         if(err){
@@ -141,8 +141,11 @@ app.get('/scripts/menuScript.js', function(req, res) {
     //res.sendFile(__dirname + "/menuScript.js");
 });
 app.get('/scripts/delete.js', function(req, res) {
-
 });
+
+app.get('/scripts/index_view.js', function(req, res) {
+});
+
 app.get('/bower_components/jquery/dist/jquery.js', function(req, res) { });
 app.get('/bower_components/bootstrap/dist/css/bootstrap.js', function(req, res) { });
 app.listen(3000);
