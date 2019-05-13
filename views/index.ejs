@@ -31,7 +31,7 @@
                       <% disc = "discount!!!"; %>
                   <% } %>
                   <li class = "list-group-item" style="color: <%= cc %>;">
-                      <a href="/products/<%= product._id %>"><%= product.model %></a> - <%= product.price - (product.discount * product.price/100) %>&#36;   <%= disc %>
+                      <a href="/products/<%= product._id %>"><%= product.name %></a> - <%= product.price - (product.discount * product.price/100) %>&#36;   <%= disc %>
                   </li>
                <% }); %>
              </ul>

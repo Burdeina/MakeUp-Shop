@@ -4,7 +4,8 @@ var router = express.Router();
 //model
 var Product = require('../models/product');
 var User = require('../models/user');
-
+var CartProduct = require('../models/cartProduct');
+var ShoppingCart = require('../models/shoppingCart');
 
 router.get('/add', ensureAuthenticated, function(req, res) {
     var errors = req.validationErrors();
@@ -53,7 +54,29 @@ router.post('/add', ensureAuthenticated, function(req, res) {
         });
     }
 });
-
+router.get('/add_to_cart/:id/:name/:price', ensureAuthenticated, function(req, res){
+    // var strid = req.user._id.toString();
+    // var query = { userId: s};
+    // console.log(req.params.model);
+    // console.log(req.params.price);
+    let cp = new CartProduct();
+    cp.userId = req.user._id.toString();
+    cp.userName = req.user.name.toString();
+    cp.productId = req.params.id;
+    cp.productName = req.params.name;
+    cp.productPrice = req.params.price;
+    cp.count = 1;
+    //to do: make count prop a type of Number
+    cp.save(function(err){
+        if(err){
+            console.log(err);
+            return;
+        } else {
+            req.flash('success', 'Product added to shopping cart');
+            res.redirect('/users/shopping_cart');
+        }
+    });
+  });
 router.get('/edit/:id', ensureAuthenticated, function(req, res){
     Product.findById(req.params.id, function(err, product){
       // User.findById(req.user._id, function(err, user){
