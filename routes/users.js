@@ -1,11 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var bcrypt = require('bcryptjs');
-//user model
-var User = require('../models/user');
 const passport = require('passport');
+
+// models
+var User = require('../models/user');
 var Product = require('../models/product');
 var CartProduct = require('../models/cartProduct');
+
 router.get('/register', function(req, res){
     var errors = req.validationErrors();
 

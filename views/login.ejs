@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <% include blocks/links.ejs %>
-      <title> Register </title>
+    <% include blocks/links.ejs %>
+    <title> Register </title>
 </head>
 <body>
 
@@ -10,48 +10,50 @@
 
 <div id="main">
   <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-  <i class="fas fa-dragon" style="font-size:35px;color:slategray;text-shadow:2px 2px 4px #000000;"></i>
-  <% include messaging_layout.ejs %>
-     <% if(errors) {%>
-         <% errors.forEach(function (error) { %>
-             <div class = "alert alert-danger"> <%= error.msg %> </div>
-         <% }) %>
-     <% } %>
-     <div class="form-add" style="height:450px">
-     <p></p>
-     <br>
-         <i class='fab fa-facebook' style="font-size:40px;color:black;"></i>
-         <i class='fab fa-instagram' style="font-size:40px;color:black;"></i>
-         <i class='fab fa-linkedin' style="font-size:40px;color:black;"></i>
+  <i class="fas fa-crown" style="font-size:35px;color:slategray;text-shadow:2px 2px 4px #000000;"></i>
 
-         <h2>Please log in:</h2>
+    <% include messaging_layout.ejs %>
+    <% if(errors) {%>
+        <% errors.forEach(function (error) { %>
+            <div class = "alert alert-danger"> <%= error.msg %> </div>
+        <% }) %>
+    <% } %>
+    <div class="form-add" style="height:450px">
+    <p></p>
+    <br>
+        <i class='fab fa-facebook' style="font-size:40px;color:black;"></i>
+        <i class='fab fa-instagram' style="font-size:40px;color:black;"></i>
+        <i class='fab fa-linkedin' style="font-size:40px;color:black;"></i>
+
+        <h2>Please log in:</h2>
         <form method="POST" action="/users/login">
-          <div class="row">
-              <div class="col">
+            <div class="row">
+                <div class="col">
 
-                      <div class="form-group">
-                        <label for="Username">Username:</label>
-                        <input type="text" name="username" class="form-control" id="username" placeholder="username">
+                        <div class="form-group">
+                            <label for="Username">Username:</label>
+                            <input type="text" name="username" class="form-control" id="username" placeholder="username">
                             <small>We'll never share your data with anyone else.</small>
-  </div>
+                        </div>
 
-  <div class="form-group">
-  <label for="Password">Password:</label>
-  <input type="password" name="password" class="form-control" id="password" placeholder="password">
-  <small>Forgot password?</small>
-  <button>Log in</button>
-  <br>
-
-  </div>
-          </div>
-      </form>
-  </div>
+                        <div class="form-group">
+                            <label for="Password">Password:</label>
+                            <input type="password" name="password" class="form-control" id="password" placeholder="password">
+                            <small>Forgot password?</small>
+                        </div>
+                        <br>
+                        <button>Log in</button>
+                </div>
+            </div>
+        </form>
+    </div>
 
 
 </div>
 
 <% include blocks/footer.ejs %>
-<script src="/scripts/menuScript.js"></script>
-<% include blocks/script_links.ejs %>
-</body>
-</html>
+
+  <script src="/scripts/menuScript.js"></script>
+  <% include blocks/script_links.ejs %>
+  </body>
+  </html>

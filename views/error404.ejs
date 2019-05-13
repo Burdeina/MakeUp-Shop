@@ -12,15 +12,16 @@
 <body>
     <% include blocks/menu.ejs %>
     <div id="main">
-    <span style="font-size:30px;cursor:pointer;color:whitesmoke" onclick="openNav()">&#9776;</span>
-    <i class="fas fa-dragon" style="font-size:35px;color:slategray;text-shadow:2px 2px 4px #000000;"></i>
+  <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+      <i class="fas fa-crown" style="font-size:35px;color:slategray;text-shadow:2px 2px 4px #000000;"></i>
     <center>
         <!-- <h1 style="color:darkred">404</h1> -->
          <img src="/images/HTML-404-Error-Page.gif" height="60%">
     </center>
     </div>
 
-  <% include blocks/script_links.ejs %>
+
     <script src="/scripts/errorMenuScript.js"></script>
+      <% include blocks/script_links.ejs %>
 </body>
 </html>

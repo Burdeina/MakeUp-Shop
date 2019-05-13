@@ -5,8 +5,6 @@ $(document).ready(function(){
         const id = $('#blabla').attr('data-id');
         const temp = $('#blabla').attr('teemp');
         //console.log(id);
-        //bug
-        console.log($(e.target).prop("teemp"));
         $.ajax({
             type:'DELETE',
             url: '/products/'+id,

@@ -22,12 +22,12 @@
                 <% products.forEach(function(product) { %>
                     <div class="card col-sm-6 col-lg-4" style="margin-bottom: 20px">
                         <div align="center">
-                            <img src="/images/<%= product.name %>.jpg" alt="<%= product.name %>" style="width:240px; height: 150px;">
+                            <img src="/images/<%= product.productName %>.jpg" alt="<%= product.productName %>" style="width:240px; height: 150px;">
                         </div>
 
-                        <h2><a href="/products/<%= product.Id %>"><%= product.name %></a></h2>
-                        <h2>Price: <%= product.price %>&#36;</h2>
-                        
+                        <h2><a href="/products/<%= product.productId %>"><%= product.productName %></a></h2>
+                        <h2>Price: <%= product.productPrice %>&#36;</h2>
+                        <h4>Count: <%= product.count %></h4>
                     </div>
                 <% }); %>
             </div>

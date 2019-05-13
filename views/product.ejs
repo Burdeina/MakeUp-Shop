@@ -15,7 +15,7 @@
   <div class="container">
   <div style="text-align:center">
     <h2><%= product.name %></h2>
-    <p>Swing by for a cup of coffee, or leave us a message:</p>
+
   </div>
   <div class="row" style="width: 90%">
     <div class="column">
@@ -34,23 +34,22 @@
     <h2>Price: <%= product.price - (product.discount * product.price/100) %>&#36;</h2>
     <% if(product.discount != 0) {%>
       <h2 style="color: red;">Discount: <%= product.discount %>&#37;</h2>
-    <% } %>
-    <p><a href="/products/add_to_cart/<%= product._id %>/<%= product.name %>/<%= product.price - (product.discount * product.price/100) %>" target="_parent"><button>Buy</button></a></p>
-    <% if(user) {%>
-<% if(user.isAdmin == true) {%>
-<p><a href="/products/edit/<%= product._id %>" target="_parent"><button>Edit</button></a></p>
-<p><a href="/products/add_discount/<%= product._id %>" target="_parent"><button>Add discount</button></a></p>
-<a class = "delete-product" href="#" id="blabla" data-id=<%= product._id %> teemp="12s4f"><button class="delete">Delete</button></a>
-<%}%>
-<%}%>
+        <% } %>
+        <p><a href="/products/add_to_cart/<%= product._id %>/<%= product.name %>/<%= product.price - (product.discount * product.price/100) %>" target="_parent"><button>Buy</button></a></p>
+        <% if(user) {%>
+          <% if(user.isAdmin == true) {%>
+            <p><a href="/products/edit/<%= product._id %>" target="_parent"><button>Edit</button></a></p>
+            <p><a href="/products/add_discount/<%= product._id %>" target="_parent"><button>Add discount</button></a></p>
+            <a class = "delete-product" href="#" id="blabla" data-id=<%= product._id %> teemp="12s4f"><button class="delete">Delete</button></a>
+          <%}%>
+        <%}%>
     </div>
   </div>
-
-
-
-<% include blocks/footer.ejs %>
-
 </div>
+<% include blocks/footer.ejs %>
+</div>
+
+
 
 <script src="/scripts/menuScript.js"></script>
 <% include blocks/script_links.ejs %>
