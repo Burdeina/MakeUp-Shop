@@ -185,18 +185,5 @@ function ensureAuthenticated(req, res, next){
 //                             |
 //to do: something with that  \|/
 
-// app.get('/product/:model', function(req, res) {
-//     var query = { model: req.params.model };
-//     Product.find(query, function(err, products){
-//         if(err){
-//             console.log(err);
-//         } else {
-//             res.render("product", {
-//                 title: "Product card",
-//                 products: products
-//             });
-//         }
-//     });
-// });
 
 module.exports = router;

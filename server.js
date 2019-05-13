@@ -148,8 +148,7 @@ app.get('/error404', function(req, res) {
 app.get('/images/HTML-404-Error-Page.gif', function(req, res) {
 });
 
-app.get('/images/xps-15.jpg', function(req, res) {
-});
+
 
 
 
