@@ -41,6 +41,7 @@
       <div class="container">
           <div class="row">
               <% products.forEach(function(product) { %>
+
                   <div class="card col-sm-6 col-lg-4" style="margin-bottom: 20px">
                     <% let cc = "black"; %>
                     <% let bc = "white"; %>
@@ -49,7 +50,7 @@
                         <% bc = "powderblue"; %>
                     <% } %>
                     <div align="center">
-                        <img src="/images/<%= product.name %>.jpg" alt="<%= product.name %>" style="width:240px; height: 150px;">
+                        <img src="/images/<%= product.name %>.jpg" alt="<%= product.name %>" style="width:240px; ">
                     </div>
                       <h2><a href="/products/<%= product._id %>"><%= product.name %></a></h2>
                       <h2 style="color: <%= cc %>; background-color:<%= bc %>;">Price: <%= product.price - (product.discount * product.price/100) %>&#36;</h2>
